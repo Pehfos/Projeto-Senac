@@ -11,6 +11,11 @@ public class FuncionarioService {
 		return dao.listar();
 	}
 	
+	public Funcionario listarFuncionarioId(Integer id){
+		FuncionarioDAO dao = new FuncionarioDAO();
+		return dao.listarId(id);
+	}
+	
 	public Boolean incluirFuncionario(Funcionario funcionario) {
 		FuncionarioDAO dao = new FuncionarioDAO();
 		return dao.incluir(funcionario);

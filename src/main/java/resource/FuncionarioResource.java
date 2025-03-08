@@ -2,7 +2,10 @@ package resource;
 
 import java.util.List;
 
+import jakarta.websocket.server.PathParam;
+import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
@@ -21,6 +24,43 @@ public class FuncionarioResource {
 		List<Funcionario> lista = service.listarFuncionario();
 		
 		Response response = Response.ok().entity(lista).build();
+		
+		return response;
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("buscar/{id}")
+	public Response getFuncionarioId(@PathParam("id")Integer id) {
+		FuncionarioService service = new FuncionarioService();
+		Funcionario funcionario = service.listarFuncionarioId(id);
+		
+		Response response = null;
+		
+		if(funcionario != null) {
+			response = Response.status(Response.Status.OK).entity(funcionario).build();
+		} else {
+			response = Response.status(Response.Status.NOT_FOUND).entity("Não encontrado.").build();
+		}
+		
+		return response;
+	}
+	
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response postFuncionario(Funcionario funcionario) {
+		FuncionarioService service = new FuncionarioService();
+		Boolean retorno = service.incluirFuncionario(funcionario);
+		
+		Response response = null;
+		
+		if(funcionario != null) {
+			response = Response.status(Response.Status.OK).entity(funcionario).build();
+		} else {
+			response = Response.status(Response.Status.NOT_FOUND).entity("Não foi possível realizar essa ação.").build();
+		}
 		
 		return response;
 	}

@@ -47,6 +47,37 @@ public class FuncionarioDAO {
 		return lista;
 	}
 	
+	public Funcionario listarId(Integer id) {
+		Connection connection = Dao.getConexao();
+		Funcionario funcionario  = null;
+		
+		String SQL = "SELECT * FROM funcionarios WHERE id = ?";
+		
+		PreparedStatement preparedStatement;
+		
+		try {
+			preparedStatement = connection.prepareStatement(SQL);
+			preparedStatement.setInt(1, id);
+			
+			ResultSet resultSet = preparedStatement.executeQuery();
+			
+			if(resultSet.next()) {
+				funcionario = new Funcionario();
+				
+				funcionario.setId(resultSet.getInt("id"));
+				funcionario.setNome(resultSet.getString("nome"));
+				funcionario.setEmail(resultSet.getString("email"));
+				funcionario.setCEP(resultSet.getString("CEP"));
+				funcionario.setCargo(resultSet.getString("cargo"));
+				funcionario.setCelular(resultSet.getString("celular"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return funcionario;
+	}
+	
 	public Boolean incluir(Funcionario funcionario) {
 		Boolean status = false;
 		Connection connection = Dao.getConexao();
