@@ -5,6 +5,7 @@ import java.util.List;
 import jakarta.websocket.server.PathParam;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
+import jakarta.ws.rs.PATCH;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
@@ -33,6 +34,10 @@ public class FuncionarioResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("buscar/{id}")
 	public Response getFuncionarioId(@PathParam("id")Integer id) {
+		 if (id == null) {
+		        return Response.status(Response.Status.BAD_REQUEST).entity("Invalid ID").build();
+		    }
+		
 		FuncionarioService service = new FuncionarioService();
 		Funcionario funcionario = service.listarFuncionarioId(id);
 		
@@ -63,5 +68,21 @@ public class FuncionarioResource {
 		}
 		
 		return response;
+	}
+	
+	@PATCH
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/funcionarios/{id}")
+	public Response patchFuncionario(@PathParam("id") Integer id, Funcionario funcionario) {
+		FuncionarioService service = new FuncionarioService();
+	    funcionario.setId(id);  // Ensure that the ID is set before calling service
+	    Boolean sucesso = service.alterarFuncionario(funcionario);
+	    
+	    if (sucesso) {
+	        return Response.status(Response.Status.OK).entity(funcionario).build();
+	    } else {
+	        return Response.status(Response.Status.NOT_FOUND).entity("Funcionario not found or update failed.").build();
+	    }
 	}
 }
