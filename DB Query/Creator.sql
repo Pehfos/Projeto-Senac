@@ -1,0 +1,20 @@
+CREATE DATABASE padaria;
+
+USE padaria;
+
+CREATE TABLE funcionarios(
+	id INT AUTO_INCREMENT NOT NULL,
+    nome VARCHAR(50) NOT NULL,
+    email VARCHAR(70) NOT NULL,
+    CEP VARCHAR(13) NOT NULL,
+    cargo VARCHAR(50) NOT NULL,
+    celular VARCHAR(20) NOT NULL,
+	PRIMARY KEY (id)
+);
+
+CREATE TABLE clientes(
+	id INT AUTO_INCREMENT NOT NULL,
+    nome VARCHAR(50) NOT NULL,
+    celular VARCHAR(20) NOT NULL,
+    PRIMARY KEY (id)
+);
