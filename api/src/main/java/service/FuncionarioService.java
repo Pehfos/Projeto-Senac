@@ -25,8 +25,8 @@ public class FuncionarioService {
 		return dao.alterar(funcionario);
 	}
 	
-	public boolean excluirFuncionario(Funcionario funcionario) {
+	public boolean excluirFuncionario(Funcionario funcionario, Integer id) {
 		FuncionarioDAO dao = new FuncionarioDAO();
-		return dao.excluir(funcionario);
+		return dao.excluir(funcionario, id);
 	}
 }

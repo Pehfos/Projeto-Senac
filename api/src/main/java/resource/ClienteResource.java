@@ -12,18 +12,17 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import model.Funcionario;
-import service.FuncionarioService;
+import model.Cliente;
+import service.ClienteService;
 
-@Path("/funcionarios")
-public class FuncionarioResource {
-	
+@Path("/clientes")
+public class ClienteResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/listar")
-	public Response getFuncionarios() {
-		FuncionarioService service = new FuncionarioService();
-		List<Funcionario> lista = service.listarFuncionario();
+	public Response getClientes() {
+		ClienteService service = new ClienteService();
+		List<Cliente> lista = service.listarCliente();
 		
 		Response response = Response.ok().entity(lista).build();
 		
@@ -34,14 +33,14 @@ public class FuncionarioResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/buscar/{id}")
-	public Response getFuncionarioId(@PathParam("id") Integer id) {
-		FuncionarioService service = new FuncionarioService();
-		Funcionario funcionario = service.consultarIdFuncionario(id);
+	public Response getClienteId(@PathParam("id") Integer id) {
+		ClienteService service = new ClienteService();
+		Cliente cliente = service.consultarIdCliente(id);
 		
 		Response response = null;
 		
-		if(funcionario != null) {
-			response = Response.status(Response.Status.OK).entity(funcionario).build();
+		if(cliente != null) {
+			response = Response.status(Response.Status.OK).entity(cliente).build();
 		} else {
 			response = Response.status(Response.Status.NOT_FOUND).entity("Não encontrado.").build();
 		}
@@ -52,14 +51,14 @@ public class FuncionarioResource {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response postFuncionario(Funcionario funcionario) {
-		FuncionarioService service = new FuncionarioService();
-		Boolean retorno = service.incluirFuncionario(funcionario);
+	public Response postCliente(Cliente cliente) {
+		ClienteService service = new ClienteService();
+		Boolean retorno = service.incluirCliente(cliente);
 		
 		Response response = null;
 		
 		if(retorno) {
-			response = Response.status(Response.Status.CREATED).entity(funcionario).build();
+			response = Response.status(Response.Status.CREATED).entity(cliente).build();
 		} else {
 			response = Response.status(Response.Status.NOT_FOUND).entity("Não foi possível realizar esta ação.").build();
 		}
@@ -71,14 +70,14 @@ public class FuncionarioResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
-	public Response putFuncionarios(@PathParam("id") Integer id, Funcionario funcionario) {
-		FuncionarioService service = new FuncionarioService();
-		Boolean retorno = service.alterarFuncionario(funcionario);
+	public Response putClientes(@PathParam("id") Integer id, Cliente cliente) {
+		ClienteService service = new ClienteService();
+		Boolean retorno = service.alterarCliente(cliente);
 		
 		Response response = null;
 		
 		if(retorno) {
-			response = Response.status(Response.Status.CREATED).entity(funcionario).build();
+			response = Response.status(Response.Status.CREATED).entity(cliente).build();
 		} else {
 			response = Response.status(Response.Status.NOT_FOUND).entity("Não foi possível realizar esta ação.").build();
 		}
@@ -89,9 +88,9 @@ public class FuncionarioResource {
 	@DELETE
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
-	public Response deleteFuncionarios(@PathParam("id") Integer id, Funcionario funcionario) {
-		FuncionarioService service = new FuncionarioService();
-		Boolean retorno = service.excluirFuncionario(funcionario, id);
+	public Response deleteClientes(@PathParam("id") Integer id, Cliente cliente) {
+		ClienteService service = new ClienteService();
+		Boolean retorno = service.excluirCliente(cliente, id);
 		
 		Response response = null;
 		

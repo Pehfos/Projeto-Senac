@@ -138,7 +138,7 @@ public class FuncionarioDAO {
 		return status;
 	}
 	
-	public boolean excluir(Funcionario funcionario) {
+	public boolean excluir(Funcionario funcionario, Integer id) {
 		boolean status = false;
 		Connection cnx = Dao.getConexao();
 		 
@@ -150,7 +150,7 @@ public class FuncionarioDAO {
 			
 			ps = cnx.prepareStatement(SQL);
 			
-			ps.setInt(1, funcionario.getId());
+			ps.setInt(1, id);
 			
 			int x = ps.executeUpdate();
 			

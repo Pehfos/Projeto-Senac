@@ -1,0 +1,5 @@
+--Versions--
+Java v21
+Tomcat v10.1
+MySql connector v1.0.3
+Jersey v3.1.10
