@@ -78,7 +78,7 @@ public class FuncionarioResource {
 		Response response = null;
 		
 		if(retorno) {
-			response = Response.status(Response.Status.CREATED).entity(funcionario).build();
+			response = Response.status(Response.Status.ACCEPTED).entity(funcionario).build();
 		} else {
 			response = Response.status(Response.Status.NOT_FOUND).entity("Não foi possível realizar esta ação.").build();
 		}

@@ -77,7 +77,7 @@ public class ClienteResource {
 		Response response = null;
 		
 		if(retorno) {
-			response = Response.status(Response.Status.CREATED).entity(cliente).build();
+			response = Response.status(Response.Status.ACCEPTED).entity(cliente).build();
 		} else {
 			response = Response.status(Response.Status.NOT_FOUND).entity("Não foi possível realizar esta ação.").build();
 		}
